@@ -1,6 +1,7 @@
 'use strict';
 
 const phoneContainer = document.getElementById('phone-container');
+const phoneDetail = document.getElementById('phone-detail');
 
 const loadPhones = () => {
   const input = document.getElementById('search-box');
@@ -17,8 +18,10 @@ const loadPhones = () => {
       if (data.data.length == 0) {
         error.innerHTML = 'Sorry! no phone found.';
         phoneContainer.textContent = ''; // remove previous search result
+        phoneDetail.textContent = ''; // remove previous phone details
       } else {
         error.innerHTML = ''; // remove error message
+        phoneDetail.textContent = ''; // remove previous phone details
         phoneContainer.textContent = ''; // remove previous search result
         displayPhones(data.data);
       }
@@ -37,7 +40,7 @@ const displayPhones = (phones) => {
         <div class="card-body">
           <h5 class="card-title">${phone.phone_name}</h5>
           <h5 class="card-title">${phone.brand}</h5>
-          <button onclick="loadSinglePhone('${phone.slug}')" class="btn btn-success">See Details</button>
+          <a href="#"><button onclick="loadSinglePhone('${phone.slug}')"   class="btn btn-success">See Details</button> </a>
         </div>
       </div>`;
 
@@ -53,21 +56,20 @@ const loadSinglePhone = (phoneId) => {
 };
 
 const displayPhoneDetails = (phone) => {
-  const phoneDetail = document.getElementById('phone-detail');
   phoneDetail.textContent = '';
   console.log(phone);
 
   const div = document.createElement('div');
   div.innerHTML = `
     <div class="card  border-0">
-       <img src="${phone.image}" class="card-img-top w-50 h-50 mx-auto pt-3">
+       <img src="${phone.image}" class="card-img-top mx-auto pt-3 phone-image">
        <div class="card-body">
           <h3 class="text-center">${phone.name}</h3>
           <h6 class="text-center">${phone?.releaseDate}</h6>
           <h3 class="text-center">${phone.brand}</h3>
           <hr>
           <h5 class="text-center">Main Features</h5>
-          <p> ChipSet: ${phone?.mainFeatures?.chipSet} </p> 
+          <p> Chipset: ${phone?.mainFeatures?.chipSet} </p> 
           <p> Display Size: ${phone?.mainFeatures?.displaySize} </p>
           <p> Memory: ${phone?.mainFeatures?.memory} </p>
           <p> Storage: ${phone?.mainFeatures?.storage} </p>
@@ -78,7 +80,8 @@ const displayPhoneDetails = (phone) => {
              ${phone?.mainFeatures?.sensors[2]}, 
              ${phone?.mainFeatures?.sensors[3]}, 
              ${phone?.mainFeatures?.sensors[4]},  
-             ${phone?.mainFeatures?.sensors[5]}
+             ${phone?.mainFeatures?.sensors[5]},
+             ${phone?.mainFeatures?.sensors[6]}
           </p> 
           <hr>
           <h5 class="text-center">Others</h5>
