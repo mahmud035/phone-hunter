@@ -29,7 +29,10 @@ const loadPhones = () => {
 };
 
 const displayPhones = (phones) => {
-  phones.forEach((phone) => {
+  const first20Phones = phones.slice(0, 20);
+  console.log(first20Phones);
+
+  first20Phones.forEach((phone) => {
     // console.log(phone);
     const div = document.createElement('div');
     // div.className = 'p-1 m-1';
@@ -57,6 +60,7 @@ const loadSinglePhone = (phoneId) => {
 
 const displayPhoneDetails = (phone) => {
   phoneDetail.textContent = '';
+  console.log(phone?.releaseDate);
   console.log(phone);
 
   const div = document.createElement('div');
