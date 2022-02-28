@@ -2,6 +2,8 @@
 
 const phoneContainer = document.getElementById('phone-container');
 const phoneDetail = document.getElementById('phone-detail');
+const spinner = document.getElementById('spinner');
+const emptySearchBox = document.getElementById('empty-search-box');
 
 const loadPhones = () => {
   const input = document.getElementById('search-box');
@@ -18,24 +20,33 @@ const loadPhones = () => {
       if (data.data.length == 0) {
         error.innerHTML = 'Sorry! no phone found.';
         phoneContainer.textContent = ''; // remove previous search result
-        phoneDetail.textContent = ''; // remove previous phone details
+        phoneDetail.textContent = '';    // remove previous phone details
+        spinner.style.display = 'block'; // show spinner
+      } else if (searchText == '') {
+        emptySearchBox.innerHTML = 'Search by a phone name.';
+        phoneContainer.textContent = '';
+        phoneDetail.textContent = '';
+        spinner.style.display = 'block';
       } else {
         error.innerHTML = ''; // remove error message
-        phoneDetail.textContent = ''; // remove previous phone details
+        emptySearchBox.innerHTML = '';
+        phoneDetail.textContent = '';    // remove previous phone details
         phoneContainer.textContent = ''; // remove previous search result
+        spinner.style.display = 'block'; // show spinner
+
         displayPhones(data.data);
+        spinner.style.display = 'none'; // remove spinner
       }
     });
 };
 
 const displayPhones = (phones) => {
-  const first20Phones = phones.slice(0, 20);
+  const first20Phones = phones.slice(0, 20); // take only 20 search result
   console.log(first20Phones);
 
   first20Phones.forEach((phone) => {
     // console.log(phone);
     const div = document.createElement('div');
-    // div.className = 'p-1 m-1';
 
     div.innerHTML = `
       <div class="card text-center border-0">

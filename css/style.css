@@ -8,6 +8,10 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+#spinner {
+  display: none;
+}
+
 @media (max-width: 992px) {
   .phone-image {
     max-width: 70%;
