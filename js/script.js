@@ -1,7 +1,10 @@
 'use strict';
 
+const phoneContainer = document.getElementById('phone-container');
+
 const loadPhones = () => {
   const input = document.getElementById('search-box');
+  const error = document.getElementById('error');
   const searchText = input.value;
   input.value = '';
 
@@ -9,12 +12,20 @@ const loadPhones = () => {
 
   fetch(url)
     .then((response) => response.json())
-    .then((data) => displayPhones(data.data));
+    .then((data) => {
+      // console.log(data.data.length == 0);
+      if (data.data.length == 0) {
+        error.innerHTML = 'Sorry! no phone found.';
+        phoneContainer.textContent = ''; // remove previous search result
+      } else {
+        error.innerHTML = '';            // remove error message
+        phoneContainer.textContent = ''; // remove previous search result
+        displayPhones(data.data);
+      }
+    });
 };
 
 const displayPhones = (phones) => {
-  const phoneContainer = document.getElementById('phone-container');
-
   phones.forEach((phone) => {
     // console.log(phone);
     const div = document.createElement('div');
