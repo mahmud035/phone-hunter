@@ -61,12 +61,7 @@ const displayPhones = (phones) => {
 
     phoneContainer.appendChild(div);
   });
-  // showAllButton.style.display = 'block';
 };
-
-// const showAll = () => {
-//   console.log();
-// };
 
 const loadSinglePhone = (phoneId) => {
   const url = `https://openapi.programming-hero.com/api/phone/${phoneId}`;
