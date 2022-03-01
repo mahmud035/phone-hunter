@@ -12,6 +12,10 @@ body {
   display: none;
 }
 
+#show-all {
+  display: none;
+}
+
 @media (max-width: 992px) {
   .phone-image {
     max-width: 70%;

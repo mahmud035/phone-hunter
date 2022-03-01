@@ -4,6 +4,7 @@ const phoneContainer = document.getElementById('phone-container');
 const phoneDetail = document.getElementById('phone-detail');
 const spinner = document.getElementById('spinner');
 const emptySearchBox = document.getElementById('empty-search-box');
+const showAllButton = document.getElementById('show-all');
 
 const loadPhones = () => {
   const input = document.getElementById('search-box');
@@ -60,7 +61,12 @@ const displayPhones = (phones) => {
 
     phoneContainer.appendChild(div);
   });
+  // showAllButton.style.display = 'block';
 };
+
+// const showAll = () => {
+//   console.log();
+// };
 
 const loadSinglePhone = (phoneId) => {
   const url = `https://openapi.programming-hero.com/api/phone/${phoneId}`;
@@ -73,7 +79,9 @@ const displayPhoneDetails = (phone) => {
   phoneDetail.textContent = '';
   // console.log(phone);
 
-  const releaseDate = (phone.releaseDate !== "") ? phone.releaseDate : "No release date found"; 
+  const releaseDate =
+    phone.releaseDate !== '' ? phone.releaseDate : 'No release date found';
+  // ternary operator
 
   const div = document.createElement('div');
   div.innerHTML = `
@@ -91,14 +99,13 @@ const displayPhoneDetails = (phone) => {
           <p> Storage: ${phone?.mainFeatures?.storage} </p>
           <hr>
           <h5 class="text-center">Sensors</h5>
-          <p>${phone?.mainFeatures?.sensors[0]},
-             ${phone?.mainFeatures?.sensors[1]}, 
-             ${phone?.mainFeatures?.sensors[2]}, 
-             ${phone?.mainFeatures?.sensors[3]}, 
-             ${phone?.mainFeatures?.sensors[4]},  
-             ${phone?.mainFeatures?.sensors[5]},
-             ${phone?.mainFeatures?.sensors[6]}
-          </p> 
+          <p> ${phone?.mainFeatures?.sensors[0]},  
+              ${phone?.mainFeatures?.sensors[1]},
+              ${phone?.mainFeatures?.sensors[2]} </p> 
+          <p> ${phone?.mainFeatures?.sensors[3]},
+              ${phone?.mainFeatures?.sensors[4]},  
+              ${phone?.mainFeatures?.sensors[5]},
+              ${phone?.mainFeatures?.sensors[6]} </p> 
           <hr>
           <h5 class="text-center">Others</h5>
           <p> Bluetooth: ${phone?.others?.Bluetooth} </p> 
