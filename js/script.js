@@ -20,7 +20,7 @@ const loadPhones = () => {
       if (data.data.length == 0) {
         error.innerHTML = 'Sorry! no phone found.';
         phoneContainer.textContent = ''; // remove previous search result
-        phoneDetail.textContent = '';    // remove previous phone details
+        phoneDetail.textContent = ''; // remove previous phone details
         spinner.style.display = 'block'; // show spinner
       } else if (searchText == '') {
         emptySearchBox.innerHTML = 'Search by a phone name.';
@@ -30,7 +30,7 @@ const loadPhones = () => {
       } else {
         error.innerHTML = ''; // remove error message
         emptySearchBox.innerHTML = '';
-        phoneDetail.textContent = '';    // remove previous phone details
+        phoneDetail.textContent = ''; // remove previous phone details
         phoneContainer.textContent = ''; // remove previous search result
         spinner.style.display = 'block'; // show spinner
 
@@ -42,7 +42,7 @@ const loadPhones = () => {
 
 const displayPhones = (phones) => {
   const first20Phones = phones.slice(0, 20); // take only 20 search result
-  console.log(first20Phones);
+  // console.log(first20Phones);
 
   first20Phones.forEach((phone) => {
     // console.log(phone);
@@ -71,8 +71,9 @@ const loadSinglePhone = (phoneId) => {
 
 const displayPhoneDetails = (phone) => {
   phoneDetail.textContent = '';
-  console.log(phone?.releaseDate);
-  console.log(phone);
+  // console.log(phone);
+
+  const releaseDate = (phone.releaseDate !== "") ? phone.releaseDate : "No release date found"; 
 
   const div = document.createElement('div');
   div.innerHTML = `
@@ -80,7 +81,7 @@ const displayPhoneDetails = (phone) => {
        <img src="${phone.image}" class="card-img-top mx-auto pt-3 phone-image">
        <div class="card-body">
           <h3 class="text-center">${phone.name}</h3>
-          <h6 class="text-center">${phone?.releaseDate}</h6>
+          <h6 class="text-center">${releaseDate}</h6>
           <h3 class="text-center">${phone.brand}</h3>
           <hr>
           <h5 class="text-center">Main Features</h5>
